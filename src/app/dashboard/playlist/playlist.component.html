@@ -8,15 +8,15 @@
   <ng-template ngFor let-list [ngForOf]="playList" let-i="index">
     <div class="container playlist-tile-wrapper">
       <div class="row">
-        <div class="col-sm">
+        <div class="col-sm-6">
           <span></span>
           <div> <h4>{{list?.name}}</h4></div>
           <div>{{list?.songList?.length}} Songs</div>
         </div>
-        <div class="col-sm">
-          <span>{{list?.creationDate | date }}</span>
+        <div class="col-sm-3">
+          <span>{{list?.creationDate | date: 'medium'}}</span>
         </div>
-        <div class="col-sm">
+        <div class="col-sm-3">
           <button type="button" class="btn btn-primary margin10" (click)="editPlayList(list)">Update</button>
           <button type="button" class="btn btn-secondary margin10" (click)="deleteFromPlaylist(list)">Delete</button>
         </div>
