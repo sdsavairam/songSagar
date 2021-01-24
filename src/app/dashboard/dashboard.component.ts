@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { AlbumService } from '../services/album.service';
 import { of } from 'rxjs';
+import { Router } from '@angular/router';
 
 export interface SongDetailInterface {
   userId: number;
@@ -25,16 +26,17 @@ export interface SongDetailInterface {
 
 export class DashboardComponent implements OnInit {
 
-  songsObj:any;
+  songsList:any;
   albumObj: any;
   songsDetails: SongDetailInterface[];
 
-  constructor(private albumService: AlbumService) { }
+  constructor(private albumService: AlbumService, private route: Router) { }
 
 
   ngOnInit(): void {
+    this.route.navigate(['/dashboard/songs']);
     this.albumService.getSongs().pipe(
-      mergeMap(songsObj => this.getSongsDetail(songsObj))
+      mergeMap(songsList => this.getSongsDetail(songsList))
     ).subscribe( response => {
       console.log(response);
     })
@@ -54,19 +56,18 @@ export class DashboardComponent implements OnInit {
   public getSongs(){
     this.albumService.getSongs().subscribe((response)=>{
       if(response){
-        this.songsObj = response;
+        this.songsList = response;
       }
     });
   }
 
-  public getSongsDetail(songsObj){
-    console.log(songsObj);
+  public getSongsDetail(songsList){
     this.songsDetails = [];
     let albumObj: any;
     let detailObj: SongDetailInterface;
     this.albumService.getAlbum().subscribe((res)=>{
       albumObj = res;
-      songsObj.forEach(song => {
+      songsList.forEach(song => {
         detailObj = {
           userId: undefined,
           albumId: undefined,
@@ -91,12 +92,13 @@ export class DashboardComponent implements OnInit {
               detailObj.userId = album.userId;
             }
           });
-          detailObj.playTime = parseInt((Math.random()*10).toFixed(2));
+          let number = Math.random()*10;
+          detailObj.playTime = Number(number.toFixed(2));
           this.songsDetails.push(detailObj);
         }
 
       });
-      console.log(this.songsDetails);
+      this.songsDetails.sort((a, b) => (a.playTime > b.playTime) ? 1 : -1);
       this.albumService.setSongDetails(this.songsDetails);
 
 

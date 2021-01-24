@@ -1,3 +1,15 @@
-<ul *ngFor="let item of songsObj;">
-  <app-song-tile [song]='item'></app-song-tile>
-</ul>
+<div class="container">
+  <input class="form-control" type="text" [(ngModel)]="searchText" (keyup)="filterSongs()" placeholder="search by Song Name...">
+</div>
+
+<div class="container songs-container">
+  <div *ngIf="showError" class="alert alert-danger" role="alert">
+    {{errorMsg}}
+  </div>
+  <ul *ngFor="let item of dataList">
+    <app-song-tile [song]='item'></app-song-tile>
+  </ul>
+
+</div>
+
+

@@ -1,0 +1,21 @@
+@import '../../../../assets/styles/variables';
+.song-tile-wrapper {
+  margin: 10px;
+  padding: 10px;
+  background-color: $ui-lightPurple;
+}
+
+.list-container {
+  width: 100%;
+  height: 300px;
+  overflow: auto;
+}
+
+.error-msg {
+  color: $ui-danger;
+}
+
+.form-container {
+  margin: 10px;
+  padding: 10px;
+}

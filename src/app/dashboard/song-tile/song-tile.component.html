@@ -1,60 +1,19 @@
-<!-- <div class="container">
-  <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-    <div class="col">
-      <div class="p-3 border bg-light">
-        <img src="{{song.thumbnailUrl}}" alt="alternatetext">
-      </div>
-    </div>
-    <div class="col">
-      <div class="p-3 border bg-light">{{song.songId}}</div>
-    </div>
-    <div class="col">
-      <div class="p-3 border bg-light">{{song.singer}}</div>
-    </div>
-    <div class="col">
-      <div class="p-3 border bg-light">{{song.songTitle}}</div>
-    </div>
-    <div class="col">
-      <div class="p-3 border bg-light">{{song.albumId}}</div>
-    </div>
-    <div class="col">
-      <div class="p-3 border bg-light">{{song.albumTitle}}</div>
-    </div>
-    <div class="col">
-      <div class="p-3 border bg-light">{{song.playTime}}</div>
-    </div>
-    <div class="col">
-      <div class="p-3 border bg-light">{{song.userId}}</div>
-    </div>
-
-    <div class="col">
-      <div class="p-3 border bg-light">{{song.url}}</div>
-    </div>
-    <div class="col">
-      <div class="p-3 border bg-light">{{song.songId}}</div>
-    </div>
-  </div>
-</div>
-
-<div>
-
-</div> -->
 <div class="container song-tile-wrapper">
   <div class="row">
     <div class="col-sm">
       <img src="{{song.thumbnailUrl}}" alt="alternatetext">
     </div>
     <div class="col-sm">
-      <h5>{{song.songTitle}}</h5>
-      <p>{{song.singer}}</p>
-      <p>{{song.albumTitle}}</p>
+      <label>Song:</label>
+      <div class="form-label">{{song.songTitle}}</div>
+      <label>Singer:</label>
+      <div class="form-label">{{song.singer}}</div>
+      <label>Album:</label>
+      <div class="form-label">{{song.albumTitle}}</div>
     </div>
     <div class="col-sm">
-      <div class="p-3 border bg-light">{{song.playTime}}</div>
-    </div>
-    <div class="col-sm">
-      <button type="button" class="btn btn-primary">Primary</button>
-      <button type="button" class="btn btn-secondary">Secondary</button>
+      <label class="form-label">Play Time:</label>
+      <div>{{song.playTime}}</div>
     </div>
   </div>
 </div>

@@ -8,7 +8,12 @@ import { AlbumService } from 'src/app/services/album.service';
 })
 export class SongsComponent implements OnInit {
 
-  public songsObj: any;
+  public songsList: any;
+  searchText: string;
+  filterList: any;
+  dataList: any;
+  showError = false;
+  errorMsg: string;
 
   constructor(private albumService: AlbumService) { }
 
@@ -16,13 +21,29 @@ export class SongsComponent implements OnInit {
     this.getSongsDetails();
   }
 
-  public getSongsDetails(){
-    this.albumService.getSongDetails().subscribe((response)=>{
+  public getSongsDetails() {
+    this.albumService.getSongDetails().subscribe((response) => {
       console.log(response);
-      if(response){
-        this.songsObj = response;
+      if (response) {
+        this.songsList = response;
+        this.dataList = this.songsList;
       }
     });
+  }
+
+  public filterSongs() {
+    this.showError = false;
+    if (this.searchText) {
+      this.filterList = this.songsList.filter(song => song.songTitle.includes(this.searchText));
+      this.dataList = this.filterList;
+      if (this.filterList.length <= 0) {
+        this.showError = true;
+        this.errorMsg = 'Song not found';
+        this.dataList = this.filterList;
+      }
+    } else {
+      this.dataList = this.songsList;
+    }
 
   }
 
