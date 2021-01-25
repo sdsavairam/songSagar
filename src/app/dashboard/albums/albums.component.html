@@ -1,0 +1,13 @@
+<div class="container">
+  <input class="form-control" type="text" [(ngModel)]="searchText" (keyup)="filterAlbums()" placeholder="search by Album Name...">
+</div>
+
+<div class="container album-container">
+  <div *ngIf="showError" class="alert alert-danger" role="alert">
+    {{errorMsg}}
+  </div>
+  <ul *ngFor="let item of dataList">
+    <app-album-tile [album]='item'></app-album-tile>
+  </ul>
+
+</div>

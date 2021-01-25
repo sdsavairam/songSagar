@@ -23,7 +23,6 @@ export class SongsComponent implements OnInit {
 
   public getSongsDetails() {
     this.albumService.getSongDetails().subscribe((response) => {
-      console.log(response);
       if (response) {
         this.songsList = response;
         this.dataList = this.songsList;

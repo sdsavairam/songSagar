@@ -1,71 +1,102 @@
-<h2 mat-dialog-title>
-  {{ isEditPlayList ? 'Edit ' : 'Create ' }} Playlist
-</h2>
-<mat-dialog-content class="mat-typography">
-  <div class="modal-body">
-
-    <div class="container form-container" *ngIf="!isEditPlayList">
-      <div class="row">
-        <div class="col-sm-4">
-          <label>PlayList Name:</label>
-        </div>
-        <div class="col-sm-8">
-          <input class="form-control list-name" type="text" [(ngModel)]="playListName"
-            placeholder="Playlist Name *" required>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="container">
-      <div class="row">
-        <div class="col-sm">
-          <div *ngIf="isEditPlayList">Playlist Name : {{currentPlayList.name}}</div>
-          <div *ngIf="isEditPlayList">Created On : {{currentPlayList.creationDate | date: 'medium'}}</div>
-        </div>
-        <div class="col-sm">
-          <button type="button" *ngIf="isEditPlayList && !isAddPlayList" (click)="addSongs()"
-            class="btn btn-primary margin10">Add New Songs</button>
-          <button type="button" *ngIf="isEditPlayList && !isAddPlayList" (click)="shuffleSongs()"
-            class="btn btn-primary margin10">Shuffle Songs</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="container form-container">
-      <input *ngIf="isAddPlayList" class="form-control" type="text" [(ngModel)]="searchText" (keyup)="filterSongs()"
-        placeholder="Search by song name...">
-    </div>
-
-    <div class="list-container">
-      <ng-template ngFor let-song [ngForOf]="dataList" let-i="index">
-        <div class="container song-tile-wrapper">
-          <div class="row">
-            <div class="col-sm-8">
-              <div>{{song.songTitle}}</div>
-              <div>{{song.singer}}</div>
-              <div>{{song.albumTitle}}</div>
-            </div>
-            <div class="col-sm-2">
-              <div>{{song.playTime}}</div>
-            </div>
-            <div class="col-sm-2">
-              <button type="button" *ngIf="isAddPlayList" (click)="addToPlayList(song)"
-                class="btn btn-primary margin10">Add</button>
-              <button type="button" *ngIf="isEditPlayList && !isAddPlayList" (click)="deleteFromPlayList(song)"
-                class="btn btn-secondary margin10">Delete</button>
+<div *ngIf="isViewMode">
+  <h2 *ngIf="isViewMode" mat-dialog-title>
+    Songs
+  </h2>
+  <mat-dialog-content class="mat-typography">
+    <div class="modal-body">
+      <div class="list-container">
+        <ng-template ngFor let-song [ngForOf]="dataList" let-i="index">
+          <div class="container song-tile-wrapper">
+            <div class="row">
+              <div class="col-sm-4">
+                <img src="{{song.thumbnailUrl}}" alt="SongImage">
+              </div>
+              <div class="col-sm-8">
+                <h2>Song {{song.id}}</h2>
+                <h3>{{song.title}}</h3>
+              </div>
             </div>
           </div>
+        </ng-template>
+      </div>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end"></mat-dialog-actions>
+</div>
+
+
+<div *ngIf="!isViewMode">
+  <h2 mat-dialog-title>
+    {{ isEditPlayList ? 'Edit ' : 'Create ' }} Playlist
+  </h2>
+  <mat-dialog-content class="mat-typography">
+    <div class="modal-body">
+
+      <div class="container form-container" *ngIf="!isEditPlayList">
+        <div class="row">
+          <div class="col-sm-4">
+            <label>PlayList Name:</label>
+          </div>
+          <div class="col-sm-8">
+            <input class="form-control list-name" type="text" [(ngModel)]="playListName" placeholder="Playlist Name *"
+              required>
+          </div>
         </div>
-      </ng-template>
+      </div>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-sm">
+            <div *ngIf="isEditPlayList">Playlist Name : {{currentPlayList.name}}</div>
+            <div *ngIf="isEditPlayList">Created On : {{currentPlayList.creationDate | date: 'medium'}}</div>
+          </div>
+          <div class="col-sm">
+            <button type="button" *ngIf="isEditPlayList && !isAddPlayList" (click)="addSongs()"
+              class="btn btn-primary margin10">Add New Songs</button>
+            <button type="button" *ngIf="isEditPlayList && !isAddPlayList" (click)="shuffleSongs()"
+              class="btn btn-primary margin10">Shuffle Songs</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="container form-container">
+        <input *ngIf="isAddPlayList" class="form-control" type="text" [(ngModel)]="searchText" (keyup)="filterSongs()"
+          placeholder="Search by song name...">
+      </div>
+
+      <div class="list-container">
+        <ng-template ngFor let-song [ngForOf]="dataList" let-i="index">
+          <div class="container song-tile-wrapper">
+            <div class="row">
+              <div class="col-sm-8">
+                <div>{{song.songTitle}}</div>
+                <div>{{song.singer}}</div>
+                <div>{{song.albumTitle}}</div>
+              </div>
+              <div class="col-sm-2">
+                <div>{{song.playTime}}</div>
+              </div>
+              <div class="col-sm-2">
+                <button type="button" *ngIf="isAddPlayList" (click)="addToPlayList(song)"
+                  class="btn btn-primary margin10">Add</button>
+                <button type="button" *ngIf="isEditPlayList && !isAddPlayList" (click)="deleteFromPlayList(song)"
+                  class="btn btn-secondary margin10">Delete</button>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+
+      <div *ngIf="showError" class="alert alert-danger" role="alert">
+        {{errorMsg}}
+      </div>
     </div>
-    <div *ngIf="showError" class="alert alert-danger" role="alert">
-      {{errorMsg}}
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <div>
+      <button class="btn btn-secondary margin10" mat-dialog-close>Cancel</button>
+      <button class="btn btn-success margin10" (click)="createPlayList()" cdkFocusInitial>
+        {{ isEditPlayList ? 'Save Playlist' : 'Create Playlist' }}</button>
     </div>
-  </div>
-</mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button class="btn btn-secondary margin10" mat-dialog-close>Cancel</button>
-  <button class="btn btn-success margin10" (click)="createPlayList()" cdkFocusInitial>
-    {{ isEditPlayList ? 'Save Playlist' : 'Create Playlist' }}</button>
-</mat-dialog-actions>
+  </mat-dialog-actions>
+  <div>

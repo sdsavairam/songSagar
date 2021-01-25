@@ -25,11 +25,11 @@ export class CreatePlaylistModelComponent implements OnInit {
   dataList: any;
   searchText: string;
   filterList: any;
+  isViewMode= false;
 
   constructor(public dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<CreatePlaylistModelComponent>) {
-    console.log('data received', data);
     this.updateData(data);
   }
 
@@ -39,7 +39,13 @@ export class CreatePlaylistModelComponent implements OnInit {
 
   updateData(data) {
     if (data) {
-      if (data.editMode) {
+      if(data.viewMode){
+        this.isEditPlayList = false;
+        this.isAddPlayList= false;
+        this.isViewMode = true;
+        this.songsList = data.songsList;
+        this.dataList = this.songsList;
+      }else if (data.editMode) {
         this.isEditPlayList = true;
         this.isAddPlayList= false;
         this.playListName = data.userPlayList.name;

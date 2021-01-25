@@ -40,11 +40,6 @@ export class DashboardComponent implements OnInit {
     ).subscribe( response => {
       console.log(response);
     })
-
-    // this.getAlbum();
-    // this.getSongs();
-    // this.songsDetails = this.getSongsDetail();
-    // console.log(this.songsDetails);
   }
 
   public getAlbum(){

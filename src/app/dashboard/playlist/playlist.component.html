@@ -10,7 +10,7 @@
       <div class="row">
         <div class="col-sm-6">
           <span></span>
-          <div> <h4>{{list?.name}}</h4></div>
+          <h4>{{list?.name}}</h4>
           <div>{{list?.songList?.length}} Songs</div>
         </div>
         <div class="col-sm-3">
@@ -23,4 +23,9 @@
       </div>
     </div>
   </ng-template>
+
+  <div *ngIf="playList.length<=0" class="alert alert-danger" role="alert">
+    No Playlist created, please create playlist...
+  </div>
+
 </div>

@@ -1,8 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { PlayListService } from 'src/app/services/play-list.service';
 import { AlbumService } from 'src/app/services/album.service';
-import {MatDialog} from '@angular/material/dialog'
-import { CreatePlaylistModelComponent, UserPlayList } from './create-playlist-model/create-playlist-model.component';
+import { PlayListService } from 'src/app/services/play-list.service';
+
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+
+import {
+    CreatePlaylistModelComponent, UserPlayList
+} from './create-playlist-model/create-playlist-model.component';
 
 @Component({
   selector: 'app-playlist',
@@ -24,7 +28,6 @@ export class PlaylistComponent implements OnInit {
   ngOnInit(): void {
     this.getSongs();
     this.getPlaylist();
-    console.log('Current PlayList:', this.playList);
   }
 
   openDialog() {
@@ -39,7 +42,6 @@ export class PlaylistComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog create result: ${result}`);
       this.addToPlaylist(result);
     });
   }
@@ -56,7 +58,6 @@ export class PlaylistComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog Edit result: ${result}`);
       this.updateToPlaylist(result);
     });
   }

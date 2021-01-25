@@ -18,6 +18,7 @@ import { SongTileComponent } from './dashboard/song-tile/song-tile.component';
 import { SongsComponent } from './dashboard/songs/songs.component';
 import { HeaderComponent } from './header/header.component';
 import { AlbumService } from './services/album.service';
+import { AlbumsComponent } from './dashboard/albums/albums.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { AlbumService } from './services/album.service';
     SongTileComponent,
     SongsComponent,
     PlaylistComponent,
-    CreatePlaylistModelComponent
+    CreatePlaylistModelComponent,
+    AlbumsComponent
   ],
   imports: [
     BrowserModule,

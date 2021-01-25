@@ -34,13 +34,15 @@ export class AlbumService {
 
   public getAlbum(){
     this.url = 'https://jsonplaceholder.typicode.com/albums';
-    // requestOptions = true;
     return this.http.get(this.url);
   }
 
-  public getSongs(){
+  public getSongs(id?: number){
+
     this.url = 'https://jsonplaceholder.typicode.com/photos';
-    // requestOptions = true;
+    if(id){
+      this.url = 'https://jsonplaceholder.typicode.com/photos?albumId='+id;
+    }
     return this.http.get(this.url);
   }
 }
